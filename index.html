@@ -726,6 +726,93 @@
               </section>
 
               <!-- ============================================== -->
+              <!-- SCREEN 6: COMPARE PLANS                        -->
+              <!-- ============================================== -->
+              <section class="proto-screen" id="screen-compare" data-screen-title="Compare Plans">
+                <div class="screen-scrollable">
+                  <!-- Nav Header -->
+                  <div class="sub-screen-nav">
+                    <button class="back-circle-btn hotspot-item" data-target="screen-home" aria-label="Back">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                      </svg>
+                    </button>
+                    <div class="nav-breadcrumbs">
+                      <span class="nav-sup-category">ANALYZED PLANS</span>
+                      <span class="nav-sup-title">Compare Plans</span>
+                    </div>
+                  </div>
+
+                  <h1 class="main-page-title">Compare Plans</h1>
+
+                  <!-- Dynamic Selectors for Plan A and Plan B -->
+                  <div class="compare-selectors-grid">
+                    <!-- Plan A Selector -->
+                    <div class="compare-selector-card plan-a-card">
+                      <span class="selector-tag">PLAN A</span>
+                      <select id="compareSelectA" class="custom-compare-select" aria-label="Select Plan A">
+                        <option value="freedom45" selected>Freedom 45</option>
+                        <option value="combosakti45">Combo Sakti 45</option>
+                        <option value="comboflex40">Combo Flex 40</option>
+                      </select>
+                    </div>
+
+                    <!-- Plan B Selector -->
+                    <div class="compare-selector-card plan-b-card">
+                      <span class="selector-tag">PLAN B</span>
+                      <select id="compareSelectB" class="custom-compare-select" aria-label="Select Plan B">
+                        <option value="combo50" selected>Combo 50</option>
+                        <option value="superseru50">Super Seru 50</option>
+                        <option value="combosakti48">Combo Sakti 48</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Matrix Table -->
+                  <div class="matrix-table-wrap">
+                    <table class="compare-matrix-table" id="compareMatrixTable">
+                      <thead>
+                        <tr>
+                          <th class="col-criteria">CRITERIA</th>
+                          <th class="col-plan-a" id="colHeaderA">FREEDOM 45</th>
+                          <th class="col-plan-b" id="colHeaderB">COMBO 50</th>
+                        </tr>
+                      </thead>
+                      <tbody id="compareTableBody">
+                        <!-- Populated by JavaScript -->
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <!-- Verdict Banner (Lime Green) -->
+                  <div class="verdict-banner-box" id="verdictBannerBox">
+                    <div class="verdict-icon-wrap">
+                      <svg viewBox="0 0 24 24" fill="currentColor" class="verdict-check">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      </svg>
+                    </div>
+                    <div class="verdict-text-content">
+                      <strong class="verdict-heading" id="verdictTitle">COMBO 50 WINS</strong>
+                      <p class="verdict-desc" id="verdictDesc">Combo 50 gives you 5GB more quota and unlimited voice for only Rp 5.000 difference.</p>
+                    </div>
+                  </div>
+
+                  <!-- Spacer for bottom CTA -->
+                  <div class="bottom-cta-spacer"></div>
+                </div>
+
+                <!-- Dual Action Bottom Bar -->
+                <div class="fixed-bottom-bar dual-bar">
+                  <button class="primary-blue-btn hotspot-item" id="btnChoosePlanA" data-target="screen-details">
+                    <span id="labelChoosePlanA">Choose Freedom 45</span>
+                  </button>
+                  <button class="primary-blue-btn hotspot-item" id="btnChoosePlanB" data-target="screen-details">
+                    <span id="labelChoosePlanB">Choose Combo 50</span>
+                  </button>
+                </div>
+              </section>
+
+              <!-- ============================================== -->
               
             </div><!-- /.screens-viewport -->
           </div><!-- /.device-screen -->
