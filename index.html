@@ -251,6 +251,114 @@
               </section>
 
               <!-- ============================================== -->
+              <!-- SCREEN 2: RECOMMENDATION PACKAGE               -->
+              <!-- ============================================== -->
+              <section class="proto-screen" id="screen-plan-package" data-screen-title="Recommendation Package">
+                <div class="screen-scrollable">
+                  <!-- Nav Header -->
+                  <div class="sub-screen-nav">
+                    <button class="back-circle-btn hotspot-item" data-target="screen-home" aria-label="Back to Home">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                      </svg>
+                    </button>
+                    <div class="nav-breadcrumbs">
+                      <span class="nav-sup-title">Plan Package</span>
+                    </div>
+                  </div>
+
+                  <h1 class="main-page-title">Recommendation Package</h1>
+
+                  <!-- Put Budget Card -->
+                  <div class="budget-input-card">
+                    <span class="input-tiny-label">PUT BUDGET</span>
+                    <div class="budget-stepper-row">
+                      <div class="budget-val-wrap">
+                        <span class="currency-tag">Rp</span>
+                        <input type="text" id="budgetInputVal" class="budget-input-field" value="85,000" readonly>
+                      </div>
+                      <div class="stepper-controls">
+                        <button class="stepper-btn" id="btnBudgetMinus" title="Decrease 10k">&minus;</button>
+                        <button class="stepper-btn" id="btnBudgetPlus" title="Increase 10k">+</button>
+                      </div>
+                    </div>
+                    <div class="budget-helper-text">Adjust budget to fine-tune your personalized recommendations</div>
+                  </div>
+
+                  <!-- Select Category Tabs -->
+                  <div class="filter-section-group">
+                    <span class="input-tiny-label">SELECT CATEGORY</span>
+                    <div class="category-pills-row" id="categoryPillsRow">
+                      <button class="cat-pill active" data-cat="data">
+                        <svg class="pill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M2 17h2v4H2zm4-3h2v7H6zm4-4h2v11h-2zm4-4h2v15h-2zm4-4h2v19h-2z"/>
+                        </svg>
+                        <span>Data</span>
+                      </button>
+                      <button class="cat-pill" data-cat="voice">
+                        <svg class="pill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                        <span>Voice</span>
+                      </button>
+                      <button class="cat-pill" data-cat="roaming">
+                        <svg class="pill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="10"/>
+                          <line x1="2" y1="12" x2="22" y2="12"/>
+                          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                        <span>Roaming</span>
+                      </button>
+                      <button class="cat-pill" data-cat="more">
+                        <svg class="pill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="1"/>
+                          <circle cx="19" cy="12" r="1"/>
+                          <circle cx="5" cy="12" r="1"/>
+                        </svg>
+                        <span>More</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Duration Filter Tabs -->
+                  <div class="filter-section-group">
+                    <span class="input-tiny-label">SELECT DURATION</span>
+                    <div class="duration-pills-row" id="durationPillsRow">
+                      <button class="dur-pill" data-dur="all">All Days</button>
+                      <button class="dur-pill" data-dur="7-14">7 - 14 Days</button>
+                      <button class="dur-pill active" data-dur="15-30">15 - 30 Days</button>
+                      <button class="dur-pill" data-dur="30+">&gt; 30 Days</button>
+                    </div>
+                  </div>
+
+                  <!-- Recommendation Match Card -->
+                  <div class="rec-match-box" id="recMatchBox">
+                    <div class="match-score-badge">
+                      <span class="match-pct" id="budgetMatchPct">86%</span>
+                    </div>
+                    <div class="match-text-content">
+                      <span class="match-label">Recommended:</span>
+                      <strong class="match-spec-text" id="budgetMatchSpec">25-30 GB • Rp 75-85K</strong>
+                      <span class="match-sub-desc">Most optimal package configured for your inputted budget</span>
+                    </div>
+                  </div>
+
+                  <!-- Spacer for bottom CTA -->
+                  <div class="bottom-cta-spacer"></div>
+                </div>
+
+                <!-- Fixed Bottom CTA Button -->
+                <div class="fixed-bottom-bar">
+                  <button class="primary-blue-btn hotspot-item" data-target="screen-recommendations" id="btnShowRecommendations">
+                    <span>Show recommendation Pack</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="cta-arrow">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </button>
+                </div>
+              </section>
+
+              <!-- ============================================== -->
               
             </div><!-- /.screens-viewport -->
           </div><!-- /.device-screen -->
