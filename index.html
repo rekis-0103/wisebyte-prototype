@@ -1258,17 +1258,39 @@
 
             </div><!-- /.screens-viewport -->
 
-            <!-- FLOATING AI ASSISTANT FAB -->
-            <button class="floating-ai-fab hotspot-item" data-target="screen-chatbot" id="btnFloatingAi" aria-label="Open WiseBot AI" title="Chat with WiseBot AI">
-              <div class="fab-glow-ring"></div>
-              <div class="fab-icon-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
-                  <path d="M12 2l2.4 7.2L21 12l-6.6 2.8L12 22l-2.4-7.2L3 12l6.6-2.8L12 2z"/>
-                </svg>
+            <!-- FLOATING AI ASSISTANT DOCKABLE WIDGET -->
+            <div class="floating-ai-fab" id="floatingAiWidget" aria-label="WiseBot AI Assistant">
+              <!-- Expanded State View -->
+              <div class="fab-expanded-content">
+                <button class="fab-main-trigger hotspot-item" data-target="screen-chatbot" id="btnFloatingAi" aria-label="Open WiseBot AI" title="Chat with WiseBot AI">
+                  <div class="fab-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                      <path d="M12 2l2.4 7.2L21 12l-6.6 2.8L12 22l-2.4-7.2L3 12l6.6-2.8L12 2z"/>
+                    </svg>
+                  </div>
+                  <span class="fab-text">WiseBot AI</span>
+                  <span class="fab-status-dot"></span>
+                </button>
+                <button class="fab-dock-toggle" id="btnFabDockToggle" aria-label="Hide assistant to side" title="Hide to side">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
               </div>
-              <span class="fab-text">WiseBot AI</span>
-              <span class="fab-status-dot"></span>
-            </button>
+
+              <!-- Collapsed / Docked Edge Tab -->
+              <button class="fab-docked-tab" id="btnFabExpandTab" aria-label="Expand WiseBot AI Assistant" title="Show WiseBot AI">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="tab-chevron-icon">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                <div class="tab-mini-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                    <path d="M12 2l2.4 7.2L21 12l-6.6 2.8L12 22l-2.4-7.2L3 12l6.6-2.8L12 2z"/>
+                  </svg>
+                </div>
+                <span class="tab-status-dot"></span>
+              </button>
+            </div>
 
             <!-- INTERACTIVE BOTTOM SHEET / CHECKOUT MODAL -->
             <div class="modal-backdrop" id="checkoutBackdrop">

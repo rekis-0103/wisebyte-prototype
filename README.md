@@ -92,8 +92,10 @@ Interactive frontend prototype of the **Wisebyte** mobile application (Mobile Da
      - Multi-stage typing bubble animation with bouncing indicator.
      - Quick suggestion chips carousel for one-tap prompting.
      - Reset conversation button with toast confirmation.
-   - **Floating AI Trigger (FAB)**:
+   - **Dockable Floating AI Trigger (FAB)**:
      - Always accessible across screens with neon lime glow ring and live status dot.
+     - **Hide to Side / Dock Mode**: Dedicated dock button (`›`) allows users to collapse the assistant into an unobtrusive side tab flush against the right edge of the phone screen, preventing it from obstructing any underlying cards or buttons.
+     - **One-Tap Expand Tab**: Tapping the collapsed edge tab (`‹ ✨`) smoothly expands it back into the full pill with spring physics.
 
 10. **Simulated Checkout & Subscription Flow**:
     - Smooth slide-up bottom sheet modal for checkout.

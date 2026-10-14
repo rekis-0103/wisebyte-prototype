@@ -252,9 +252,9 @@ document.addEventListener('DOMContentLoaded', () => {
       screenSelect.value = targetId;
     }
 
-    const fab = document.getElementById('btnFloatingAi');
-    if (fab) {
-      fab.classList.toggle('hidden', targetId === 'screen-chatbot');
+    const fabWidget = document.getElementById('floatingAiWidget') || document.getElementById('btnFloatingAi');
+    if (fabWidget) {
+      fabWidget.classList.toggle('hidden', targetId === 'screen-chatbot');
     }
 
     if (targetId === 'screen-chatbot') {
@@ -322,6 +322,8 @@ document.addEventListener('DOMContentLoaded', () => {
     btnRestart.addEventListener('click', () => {
       historyStack = ['screen-home'];
       navigateTo('screen-home', false);
+      const fabWidget = document.getElementById('floatingAiWidget');
+      if (fabWidget) fabWidget.classList.remove('docked');
       showToast('Prototype reset to initial screen');
     });
   }
@@ -1038,6 +1040,25 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
     showToast('Conversation cleared');
+  });
+
+  // Floating AI Assistant Dock / Undock Controls
+  const floatingAiWidget = document.getElementById('floatingAiWidget');
+  const btnFabDockToggle = document.getElementById('btnFabDockToggle');
+  const btnFabExpandTab = document.getElementById('btnFabExpandTab');
+
+  btnFabDockToggle?.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    floatingAiWidget?.classList.add('docked');
+    showToast('WiseBot AI tucked to side');
+  });
+
+  btnFabExpandTab?.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    floatingAiWidget?.classList.remove('docked');
+    showToast('WiseBot AI expanded');
   });
 
   // Initial load

@@ -2608,34 +2608,56 @@ body.show-hotspots .hotspot-card::after {
    WISEBOT AI ASSISTANT & CHATBOT STYLES
    ========================================================= */
 
-/* Floating AI Assistant FAB */
+/* =========================================================
+   FLOATING AI ASSISTANT DOCKABLE WIDGET
+   ========================================================= */
 .floating-ai-fab {
   position: absolute;
   bottom: 20px;
-  right: 18px;
+  right: 16px;
   z-index: 80;
+  display: flex;
+  align-items: center;
+  transition: right 0.3s cubic-bezier(0.34, 1.25, 0.64, 1), bottom 0.2s ease, transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+/* Expanded Pill Container */
+.fab-expanded-content {
+  display: flex;
+  align-items: center;
   background: linear-gradient(135deg, #0D1520 0%, #162436 100%);
-  color: #FFFFFF;
-  border: 1.5px solid rgba(210, 248, 52, 0.4);
+  border: 1.5px solid rgba(210, 248, 52, 0.45);
   border-radius: var(--radius-full);
-  padding: 8px 14px 8px 10px;
+  box-shadow: 0 8px 24px rgba(13, 21, 32, 0.4), 0 0 16px rgba(210, 248, 52, 0.25);
+  backdrop-filter: blur(8px);
+  padding: 4px 6px 4px 6px;
+  gap: 2px;
+  transition: transform var(--transition-bounce), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.fab-expanded-content:hover {
+  transform: translateY(-2px);
+  border-color: var(--neon-lime);
+  box-shadow: 0 12px 28px rgba(13, 21, 32, 0.5), 0 0 22px rgba(210, 248, 52, 0.45);
+}
+
+/* Main Clickable Trigger to Open Chat */
+.fab-main-trigger {
+  background: transparent;
+  border: none;
   display: flex;
   align-items: center;
   gap: 8px;
+  padding: 4px 8px 4px 4px;
+  color: #FFFFFF;
+  font-family: inherit;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(13, 21, 32, 0.4), 0 0 16px rgba(210, 248, 52, 0.25);
-  transition: transform var(--transition-bounce), box-shadow var(--transition-fast), border-color var(--transition-fast);
-  backdrop-filter: blur(8px);
+  border-radius: var(--radius-full);
+  transition: background var(--transition-fast);
 }
 
-.floating-ai-fab:hover {
-  transform: translateY(-3px) scale(1.04);
-  border-color: var(--neon-lime);
-  box-shadow: 0 12px 28px rgba(13, 21, 32, 0.5), 0 0 22px rgba(210, 248, 52, 0.5);
-}
-
-.floating-ai-fab:active {
-  transform: translateY(0) scale(0.97);
+.fab-main-trigger:hover {
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .fab-icon-box {
@@ -2661,6 +2683,7 @@ body.show-hotspots .hotspot-card::after {
   font-weight: 800;
   letter-spacing: 0.2px;
   color: #FFFFFF;
+  white-space: nowrap;
 }
 
 .fab-status-dot {
@@ -2670,6 +2693,125 @@ body.show-hotspots .hotspot-card::after {
   background: var(--neon-lime);
   box-shadow: 0 0 8px var(--neon-lime);
   animation: pulseFabDot 1.8s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+/* Hide-to-side (Dock) Toggle Button */
+.fab-dock-toggle {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  flex-shrink: 0;
+  margin-left: 2px;
+}
+
+.fab-dock-toggle:hover {
+  background: rgba(210, 248, 52, 0.25);
+  border-color: var(--neon-lime);
+  color: var(--neon-lime);
+  transform: translateX(1px);
+}
+
+.fab-dock-toggle svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* =========================================================
+   DOCKED / COLLAPSED SIDE TAB STATE
+   ========================================================= */
+.floating-ai-fab.docked {
+  right: 0 !important;
+  bottom: 26px;
+}
+
+.floating-ai-fab.docked .fab-expanded-content {
+  display: none !important;
+}
+
+.floating-ai-fab:not(.docked) .fab-docked-tab {
+  display: none !important;
+}
+
+.fab-docked-tab {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(135deg, #0D1520 0%, #172437 100%);
+  border: 1.5px solid rgba(210, 248, 52, 0.55);
+  border-right: none;
+  border-radius: 20px 0 0 20px;
+  padding: 6px 6px 6px 9px;
+  cursor: pointer;
+  box-shadow: -4px 6px 20px rgba(13, 21, 32, 0.45), 0 0 14px rgba(210, 248, 52, 0.25);
+  color: #FFFFFF;
+  transition: transform 0.25s cubic-bezier(0.34, 1.3, 0.64, 1), box-shadow 0.2s, border-color 0.2s;
+  animation: slideInFromRight 0.3s cubic-bezier(0.34, 1.25, 0.64, 1);
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.fab-docked-tab:hover {
+  transform: translateX(-4px);
+  border-color: var(--neon-lime);
+  box-shadow: -6px 8px 24px rgba(13, 21, 32, 0.55), 0 0 20px rgba(210, 248, 52, 0.5);
+}
+
+.tab-chevron-icon {
+  width: 13px;
+  height: 13px;
+  color: var(--neon-lime);
+  animation: pulseDockChevron 2s infinite ease-in-out;
+}
+
+@keyframes pulseDockChevron {
+  0%, 100% { transform: translateX(0); opacity: 0.8; }
+  50% { transform: translateX(-3px); opacity: 1; }
+}
+
+.tab-mini-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--neon-lime) 0%, #B8E817 100%);
+  color: #0D1520;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px rgba(210, 248, 52, 0.6);
+  flex-shrink: 0;
+}
+
+.tab-mini-icon svg {
+  width: 12px;
+  height: 12px;
+}
+
+.tab-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--neon-lime);
+  box-shadow: 0 0 6px var(--neon-lime);
+  animation: pulseFabDot 1.8s infinite ease-in-out;
+  flex-shrink: 0;
 }
 
 @keyframes pulseFabDot {
