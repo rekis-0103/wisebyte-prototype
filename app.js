@@ -251,6 +251,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (screenSelect) {
       screenSelect.value = targetId;
     }
+
+    const fab = document.getElementById('btnFloatingAi');
+    if (fab) {
+      fab.classList.toggle('hidden', targetId === 'screen-chatbot');
+    }
+
+    if (targetId === 'screen-chatbot') {
+      setTimeout(() => {
+        scrollChatToBottom();
+      }, 100);
+    }
   }
 
   function goBack() {
@@ -704,6 +715,332 @@ document.addEventListener('DOMContentLoaded', () => {
     navigateTo('screen-home');
   });
 
+  // ==========================================
+  // SCREEN 9: WISEBOT AI ASSISTANT CHAT ENGINE
+  // ==========================================
+  const chatMessagesArea = document.getElementById('chatMessagesArea');
+  const chatForm = document.getElementById('chatForm');
+  const chatInput = document.getElementById('chatInput');
+  const chatTypingIndicator = document.getElementById('chatTypingIndicator');
+  const btnClearChat = document.getElementById('btnClearChat');
+  const chatChipsCarousel = document.getElementById('chatChipsCarousel');
+
+  function scrollChatToBottom() {
+    if (chatMessagesArea) {
+      setTimeout(() => {
+        chatMessagesArea.scrollTop = chatMessagesArea.scrollHeight;
+      }, 50);
+    }
+  }
+
+  function appendUserMessage(text) {
+    if (!chatMessagesArea) return;
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    const msgEl = document.createElement('div');
+    msgEl.className = 'chat-msg user-msg';
+    msgEl.innerHTML = `
+      <div class="msg-body">
+        <div class="msg-bubble">${escapeHtml(text)}</div>
+        <span class="msg-time">${timeStr}</span>
+      </div>
+    `;
+
+    // Insert before typing indicator if it exists
+    if (chatTypingIndicator) {
+      chatMessagesArea.insertBefore(msgEl, chatTypingIndicator);
+    } else {
+      chatMessagesArea.appendChild(msgEl);
+    }
+    scrollChatToBottom();
+  }
+
+  function appendBotMessage(htmlContent, richCardHtml = '') {
+    if (!chatMessagesArea) return;
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    const msgEl = document.createElement('div');
+    msgEl.className = 'chat-msg bot-msg';
+    msgEl.innerHTML = `
+      <div class="msg-avatar-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M12 2l2.4 7.2L21 12l-6.6 2.8L12 22l-2.4-7.2L3 12l6.6-2.8L12 2z"/>
+        </svg>
+      </div>
+      <div class="msg-body">
+        <div class="msg-bubble">${htmlContent}</div>
+        ${richCardHtml}
+        <span class="msg-time">${timeStr}</span>
+      </div>
+    `;
+
+    // Insert before typing indicator
+    if (chatTypingIndicator) {
+      chatMessagesArea.insertBefore(msgEl, chatTypingIndicator);
+    } else {
+      chatMessagesArea.appendChild(msgEl);
+    }
+    scrollChatToBottom();
+  }
+
+  function escapeHtml(string) {
+    const div = document.createElement('div');
+    div.innerText = string;
+    return div.innerHTML;
+  }
+
+  function showBotTyping(show = true) {
+    if (chatTypingIndicator) {
+      chatTypingIndicator.style.display = show ? 'flex' : 'none';
+      if (show) scrollChatToBottom();
+    }
+  }
+
+  // Knowledge base and AI response generator
+  function generateBotResponse(userQuery) {
+    const q = userQuery.toLowerCase().trim();
+
+    // 1. Budget & Recommendations
+    if (q.includes('85k') || q.includes('85.000') || q.includes('80k') || q.includes('budget') || q.includes('recommend') || q.includes('best plan') || q.includes('saran') || q.includes('rekomendasi') || q.includes('cheap') || q.includes('murah')) {
+      const p = PLANS_DB.freedom45;
+      const card = `
+        <div class="chat-plan-embed-card">
+          <div class="embed-plan-head">
+            <span class="embed-plan-title">${p.name}</span>
+            <span class="embed-plan-badge">+ BEST MATCH (95%)</span>
+          </div>
+          <div class="embed-plan-specs">
+            <span class="embed-quota">${p.quota}</span>
+            <span class="embed-price">${p.price} / 30d</span>
+          </div>
+          <span class="embed-perk">35 GB Main Quota + 10 GB Apps • 60 mins calls</span>
+          <div class="embed-actions-row">
+            <button class="embed-btn-primary hotspot-item" data-target="screen-details" data-plan="freedom45">View Details</button>
+            <button class="embed-btn-outline hotspot-item" data-target="screen-compare" data-preselect="freedom45">Compare</button>
+          </div>
+        </div>
+      `;
+      return {
+        text: `<p>Based on your <strong>Rp 85,000 budget</strong> and current YouTube/Instagram usage, my #1 recommendation is <strong>Freedom 45</strong> (95% match, Rp 84.000). You can also consider <strong>Combo Sakti 45</strong> (Rp 80.000).</p><p>Here is your tailored match:</p>`,
+        card: card
+      };
+    }
+
+    // 2. Data Usage & Diagnostic
+    if (q.includes('usage') || q.includes('analyze') || q.includes('audit') || q.includes('tracking') || q.includes('pemakaian') || q.includes('quota') || q.includes('kuota') || q.includes('habis') || q.includes('boros')) {
+      const actionBtn = `
+        <button class="chat-action-link-btn hotspot-item" data-target="screen-data-usage">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <span>View Detailed 7-Day Chart &rarr;</span>
+        </button>
+      `;
+      return {
+        text: `
+          <p>📊 <strong>Your Data Health Diagnostic:</strong></p>
+          <p>• <strong>Remaining:</strong> 18.6 GB of 30 GB (62% safe, expires Oct 28).<br>
+          • <strong>Daily Burn Rate:</strong> ~1.42 GB/day.<br>
+          • <strong>Heavy Consumers:</strong> YouTube (14.2 GB • 45%) and Instagram (8.5 GB • 28%).<br>
+          • <strong>Peak Surge:</strong> Saturdays reach 3.4 GB (binge streaming).</p>
+          <p>At this rate, your quota will comfortably last <strong>13 more days</strong>.</p>
+        `,
+        card: actionBtn
+      };
+    }
+
+    // 3. Compare Plans
+    if (q.includes('compare') || q.includes('vs') || q.includes('banding') || q.includes('difference') || q.includes('freedom') && q.includes('combo')) {
+      const actionBtn = `
+        <button class="chat-action-link-btn hotspot-item" data-target="screen-compare">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span>Open Comparison Matrix &rarr;</span>
+        </button>
+      `;
+      return {
+        text: `
+          <p>⚖️ <strong>Freedom 45 vs Combo 50 Comparison:</strong></p>
+          <p>• <strong>Freedom 45:</strong> Rp 84.000 (45 GB) &rarr; Rp 1,866 / GB.<br>
+          • <strong>Combo 50:</strong> Rp 89.000 (50 GB) &rarr; Rp 1,780 / GB (Cheaper per GB!).</p>
+          <p>🏆 <strong>Winner: Combo 50!</strong> For just Rp 5.000 extra, you get <strong>+5 GB more data</strong> and Unlimited same-network voice calls.</p>
+        `,
+        card: actionBtn
+      };
+    }
+
+    // 4. Netflix / Video Streaming / Calculator
+    if (q.includes('netflix') || q.includes('streaming') || q.includes('youtube') && (q.includes('hour') || q.includes('jam')) || q.includes('zoom') || q.includes('estimate') || q.includes('calc')) {
+      const actionBtn = `
+        <button class="chat-action-link-btn hotspot-item" data-target="screen-calculator">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/></svg>
+          <span>Open Interactive Calculator &rarr;</span>
+        </button>
+      `;
+      return {
+        text: `
+          <p>🎬 <strong>Streaming Consumption Breakdown:</strong></p>
+          <p>• <strong>Netflix HD (1080p):</strong> ~1.2 GB per hour.<br>
+          • <strong>3 hours of Netflix HD</strong> = <strong>~3.6 GB</strong>.<br>
+          • If streamed daily for 30 days = <strong>108 GB/month</strong>!</p>
+          <p>💡 Tip: For heavy streaming, consider plans with dedicated App Quotas or unlimited streaming add-ons.</p>
+        `,
+        card: actionBtn
+      };
+    }
+
+    // 5. Data Saving Tips
+    if (q.includes('save') || q.includes('tips') || q.includes('hemat') || q.includes('reduce')) {
+      return {
+        text: `
+          <p>⚡ <strong>4 Actionable Data Saving Tips:</strong></p>
+          <p>1. <strong>YouTube:</strong> Lower default playback to 480p or 720p on mobile data (saves up to 60% bandwidth).<br>
+          2. <strong>Instagram & TikTok:</strong> Turn on 'Data Saver' mode in app settings.<br>
+          3. <strong>WhatsApp:</strong> Disable 'Auto-download media' on cellular data.<br>
+          4. <strong>Phone Settings:</strong> Toggle off 'Background App Refresh' for non-essential apps.</p>
+        `,
+        card: ''
+      };
+    }
+
+    // 6. Cheapest 50 GB
+    if (q.includes('50 gb') || q.includes('50gb') || q.includes('combo 50') || q.includes('super seru')) {
+      const p = PLANS_DB.combo50;
+      const card = `
+        <div class="chat-plan-embed-card">
+          <div class="embed-plan-head">
+            <span class="embed-plan-title">${p.name}</span>
+            <span class="embed-plan-badge">TOP RATED 4.8★</span>
+          </div>
+          <div class="embed-plan-specs">
+            <span class="embed-quota">${p.quota}</span>
+            <span class="embed-price">${p.price} / 30d</span>
+          </div>
+          <span class="embed-perk">40 GB Main + 10 GB Apps & Social • Unlimited voice</span>
+          <div class="embed-actions-row">
+            <button class="embed-btn-primary hotspot-item" data-target="screen-details" data-plan="combo50">View Details</button>
+            <button class="embed-btn-outline hotspot-item" data-target="screen-compare" data-preselect="combo50">Compare</button>
+          </div>
+        </div>
+      `;
+      return {
+        text: `<p>Our most cost-effective 50 GB package is <strong>Combo 50 at Rp 89.000</strong> (Rp 1,780/GB). It includes 40 GB Main + 10 GB Apps with a 96% customer satisfaction rate.</p>`,
+        card: card
+      };
+    }
+
+    // 7. Roaming
+    if (q.includes('roaming') || q.includes('travel') || q.includes('luar negeri')) {
+      return {
+        text: `
+          <p>✈️ <strong>International Roaming:</strong></p>
+          <p>Wisebyte offers instant borderless roaming across Singapore, Malaysia, Thailand, and 80+ countries starting from <strong>Rp 50,000 / 3 days (5 GB)</strong>.</p>
+          <p>You can check the Roaming category inside the <strong>Recommendation Package</strong> screen!</p>
+        `,
+        card: `
+          <button class="chat-action-link-btn hotspot-item" data-target="screen-plan-package">
+            <span>Open Plan Package &rarr;</span>
+          </button>
+        `
+      };
+    }
+
+    // Default Fallback
+    return {
+      text: `
+        <p>I'm here to help with all telecom & mobile data decisions! You can ask me to:</p>
+        <p>• <strong>"Recommend a plan under Rp 85K"</strong><br>
+        • <strong>"Analyze my data usage"</strong><br>
+        • <strong>"Compare Freedom 45 vs Combo 50"</strong><br>
+        • <strong>"How much data for 3h Netflix?"</strong></p>
+      `,
+      card: ''
+    };
+  }
+
+  function handleSendChatMessage(text) {
+    const cleanText = text.trim();
+    if (!cleanText) return;
+
+    appendUserMessage(cleanText);
+    if (chatInput) chatInput.value = '';
+
+    showBotTyping(true);
+
+    // Realistic bot thinking delay
+    const delay = Math.floor(Math.random() * 250) + 400;
+    setTimeout(() => {
+      showBotTyping(false);
+      const res = generateBotResponse(cleanText);
+      appendBotMessage(res.text, res.card);
+    }, delay);
+  }
+
+  chatForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (chatInput && chatInput.value.trim()) {
+      handleSendChatMessage(chatInput.value);
+    }
+  });
+
+  // Quick Chips Handler
+  chatChipsCarousel?.addEventListener('click', (e) => {
+    const chip = e.target.closest('.chat-chip');
+    if (!chip) return;
+    const prompt = chip.getAttribute('data-prompt') || chip.textContent.trim();
+    handleSendChatMessage(prompt);
+  });
+
+  // Mini Starter Cards inside initial message
+  chatMessagesArea?.addEventListener('click', (e) => {
+    const miniCard = e.target.closest('.chat-mini-action-card');
+    if (!miniCard) return;
+    const prompt = miniCard.getAttribute('data-prompt') || miniCard.querySelector('strong')?.textContent.trim();
+    if (prompt) {
+      handleSendChatMessage(prompt);
+    }
+  });
+
+  // Clear Chat Button
+  btnClearChat?.addEventListener('click', () => {
+    if (!chatMessagesArea) return;
+    chatMessagesArea.innerHTML = `
+      <div class="chat-time-divider">
+        <span>TODAY • AI ADVISORY SESSION</span>
+      </div>
+      <div class="chat-msg bot-msg">
+        <div class="msg-avatar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 2l2.4 7.2L21 12l-6.6 2.8L12 22l-2.4-7.2L3 12l6.6-2.8L12 2z"/>
+          </svg>
+        </div>
+        <div class="msg-body">
+          <div class="msg-bubble">
+            <p>Chat cleared! 👋 How can I help you optimize your mobile data today?</p>
+          </div>
+          <span class="msg-time">Just now</span>
+        </div>
+      </div>
+      <div class="chat-msg bot-msg typing-msg" id="chatTypingIndicator" style="display: none;">
+        <div class="msg-avatar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 2l2.4 7.2L21 12l-6.6 2.8L12 22l-2.4-7.2L3 12l6.6-2.8L12 2z"/>
+          </svg>
+        </div>
+        <div class="msg-body">
+          <div class="msg-bubble typing-bubble">
+            <div class="typing-dots">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    showToast('Conversation cleared');
+  });
+
   // Initial load
   loadPlanDetails('combo50');
 });
+

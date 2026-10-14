@@ -39,6 +39,7 @@
           <option value="screen-compare">6. Compare Plans</option>
           <option value="screen-data-usage">7. Data Usage & Tracking</option>
           <option value="screen-details">8. Package Details (Combo 50)</option>
+          <option value="screen-chatbot">9. WiseBot AI Assistant</option>
         </select>
         <svg class="select-arrow" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -244,6 +245,30 @@
                       <div class="insight-text">
                         <strong>Smart Tip:</strong> Remaining quota is optimal for the next 14 days based on your daily usage pattern.
                       </div>
+                    </div>
+                  </div>
+
+                  <!-- AI Assistant Prompt Banner -->
+                  <div class="home-ai-banner hotspot-card" data-target="screen-chatbot" title="Chat with WiseBot AI Advisor">
+                    <div class="ai-banner-left">
+                      <div class="ai-spark-circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                          <path d="M12 2l2.4 7.2L21 12l-6.6 2.8L12 22l-2.4-7.2L3 12l6.6-2.8L12 2z"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="ai-banner-content">
+                      <div class="ai-tag-row">
+                        <span class="ai-tag">WISEBOT AI</span>
+                        <span class="ai-live-indicator"><span class="dot-live"></span>Online</span>
+                      </div>
+                      <strong class="ai-banner-title">Need help choosing a plan?</strong>
+                      <p class="ai-banner-desc">Ask WiseBot to analyze your usage & find packages with maximum savings.</p>
+                    </div>
+                    <div class="ai-banner-action-arr">
+                      <svg viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd"/>
+                      </svg>
                     </div>
                   </div>
 
@@ -1106,7 +1131,144 @@
                 </div>
               </section>
 
+              <!-- ============================================== -->
+              <!-- SCREEN 9: WISEBOT AI ASSISTANT CHATBOT         -->
+              <!-- ============================================== -->
+              <section class="proto-screen" id="screen-chatbot" data-screen-title="WiseBot AI Assistant">
+                <!-- Chat Screen Fixed Header -->
+                <div class="chat-custom-header">
+                  <button class="back-circle-btn hotspot-item" data-target="screen-home" aria-label="Back to Home">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                  </button>
+
+                  <div class="chat-header-info">
+                    <div class="chat-avatar-wrapper">
+                      <div class="chat-bot-avatar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                          <path d="M12 2l2.4 7.2L21 12l-6.6 2.8L12 22l-2.4-7.2L3 12l6.6-2.8L12 2z"/>
+                        </svg>
+                      </div>
+                      <span class="chat-online-pulse" title="Online"></span>
+                    </div>
+                    <div class="chat-text-details">
+                      <div class="chat-title-badge-row">
+                        <h2 class="chat-bot-title">WiseBot AI</h2>
+                        <span class="chat-ai-pill">SMART 2.4</span>
+                      </div>
+                      <span class="chat-sub-status">Data Advisor & Optimizer • Active</span>
+                    </div>
+                  </div>
+
+                  <div class="chat-header-actions">
+                    <button class="chat-tool-btn" id="btnClearChat" title="Reset Conversation" aria-label="Reset chat">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                        <path d="M3 3v5h5"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Chat Messages Scroll Area -->
+                <div class="chat-messages-area" id="chatMessagesArea">
+                  <div class="chat-time-divider">
+                    <span>TODAY • AI ADVISORY SESSION</span>
+                  </div>
+
+                  <!-- Initial Welcome Message from WiseBot -->
+                  <div class="chat-msg bot-msg">
+                    <div class="msg-avatar-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <path d="M12 2l2.4 7.2L21 12l-6.6 2.8L12 22l-2.4-7.2L3 12l6.6-2.8L12 2z"/>
+                      </svg>
+                    </div>
+                    <div class="msg-body">
+                      <div class="msg-bubble">
+                        <p>Hi Alex! 👋 I'm <strong>WiseBot</strong>, your personal AI data advisor.</p>
+                        <p>I monitor your real-time data usage: currently <strong>18.6 GB</strong> left out of 30 GB (averaging <strong>1.42 GB/day</strong>, highest on YouTube & Instagram).</p>
+                        <p>How can I assist you today? You can ask me to recommend packages for your budget, diagnose usage spikes, or compare plans!</p>
+                      </div>
+
+                      <!-- Mini Quick Starter Cards inside chat -->
+                      <div class="chat-quick-card-grid">
+                        <button class="chat-mini-action-card" data-prompt="Best plan under Rp 85K">
+                          <div class="mini-card-icon">💡</div>
+                          <div class="mini-card-info">
+                            <strong>Find Best Match</strong>
+                            <span>Under Rp 85.000</span>
+                          </div>
+                        </button>
+                        <button class="chat-mini-action-card" data-prompt="Analyze my data usage">
+                          <div class="mini-card-icon">📊</div>
+                          <div class="mini-card-info">
+                            <strong>Audit Usage</strong>
+                            <span>Diagnostic report</span>
+                          </div>
+                        </button>
+                      </div>
+
+                      <span class="msg-time">Just now</span>
+                    </div>
+                  </div>
+
+                  <!-- Dynamic Bot Typing Indicator -->
+                  <div class="chat-msg bot-msg typing-msg" id="chatTypingIndicator" style="display: none;">
+                    <div class="msg-avatar-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <path d="M12 2l2.4 7.2L21 12l-6.6 2.8L12 22l-2.4-7.2L3 12l6.6-2.8L12 2z"/>
+                      </svg>
+                    </div>
+                    <div class="msg-body">
+                      <div class="msg-bubble typing-bubble">
+                        <div class="typing-dots">
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Quick Prompt Suggestion Carousel -->
+                <div class="chat-chips-carousel" id="chatChipsCarousel">
+                  <button class="chat-chip" data-prompt="Best plan under Rp 85K">💡 Best plan &lt; 85K</button>
+                  <button class="chat-chip" data-prompt="Analyze my data usage">📊 Analyze my data</button>
+                  <button class="chat-chip" data-prompt="Compare Freedom 45 vs Combo 50">⚖️ Compare plans</button>
+                  <button class="chat-chip" data-prompt="How much data for 3 hours of Netflix HD?">🎬 3h Netflix usage?</button>
+                  <button class="chat-chip" data-prompt="How to save YouTube quota?">⚡ Save YouTube data</button>
+                  <button class="chat-chip" data-prompt="Cheapest 50 GB plan">🔥 Cheapest 50 GB</button>
+                </div>
+
+                <!-- Chat Input Form -->
+                <div class="chat-input-bar">
+                  <form class="chat-form" id="chatForm">
+                    <input type="text" id="chatInput" class="chat-input-field" placeholder="Ask WiseBot anything about data..." autocomplete="off">
+                    <button type="submit" class="chat-send-btn" id="btnChatSend" aria-label="Send message">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="22" y1="2" x2="11" y2="13"/>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                      </svg>
+                    </button>
+                  </form>
+                </div>
+              </section>
+
             </div><!-- /.screens-viewport -->
+
+            <!-- FLOATING AI ASSISTANT FAB -->
+            <button class="floating-ai-fab hotspot-item" data-target="screen-chatbot" id="btnFloatingAi" aria-label="Open WiseBot AI" title="Chat with WiseBot AI">
+              <div class="fab-glow-ring"></div>
+              <div class="fab-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                  <path d="M12 2l2.4 7.2L21 12l-6.6 2.8L12 22l-2.4-7.2L3 12l6.6-2.8L12 2z"/>
+                </svg>
+              </div>
+              <span class="fab-text">WiseBot AI</span>
+              <span class="fab-status-dot"></span>
+            </button>
 
             <!-- INTERACTIVE BOTTOM SHEET / CHECKOUT MODAL -->
             <div class="modal-backdrop" id="checkoutBackdrop">

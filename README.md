@@ -4,7 +4,7 @@ Interactive frontend prototype of the **Wisebyte** mobile application (Mobile Da
 
 ---
 
-## 📱 8 Screens & Interactive Feature Breakdown
+## 📱 9 Screens & Interactive Feature Breakdown
 
 1. **Home Dashboard (`#screen-home`)**:
    - `Hello, User` header with glowing profile avatar indicator.
@@ -19,6 +19,7 @@ Interactive frontend prototype of the **Wisebyte** mobile application (Mobile Da
      - *Compare plans* &rarr; Navigate to Plan Comparison Matrix
      - *Tracking* &rarr; Navigate to Data Usage Statistics & Breakdown
      - *Package Details* &rarr; Navigate to Plan Details (Combo 50)
+   - **WiseBot AI Assistant Prompt Card**: Dark slate banner with neon lime sparkle icon, active diagnostic badge, and direct hotspot leading to WiseBot AI.
    - **Smart Tip Widget**: Dynamic consumption insight based on usage velocity.
 
 2. **Recommendation Package (`#screen-plan-package`)**:
@@ -77,19 +78,36 @@ Interactive frontend prototype of the **Wisebyte** mobile application (Mobile Da
    - Verified customer reviews.
    - Bottom CTA: *Choose plan • Rp 89.000 &rarr;*.
 
-9. **Simulated Checkout & Subscription Flow**:
-   - Smooth slide-up bottom sheet modal for checkout.
-   - Payment method selection: QRIS Instant, GoPay / E-Wallet, Credit Card / Debit, Mobile Balance.
-   - Success celebration modal with confetti badge that updates the Home screen remaining quota in real-time.
+9. **WiseBot AI Assistant (`#screen-chatbot`)** ✨:
+   - **Intelligent Conversational Advisor**:
+     - Natural language queries for budget recommendations (e.g. *Best plan under Rp 85K*).
+     - Data health audit & diagnostic reports based on the user's real-time burn velocity.
+     - Direct plan comparisons (e.g. *Freedom 45 vs Combo 50*).
+     - Streaming data calculations (e.g. *How much data for 3 hours of Netflix HD?*).
+     - Bandwidth optimization tips for YouTube, Instagram, and WhatsApp.
+   - **Interactive Rich Embeds**:
+     - Embedded plan preview cards with actionable *View Details* and *Compare* triggers that seamlessly transition to other prototype screens.
+     - Embedded navigation shortcut buttons directly linking to the 7-day usage tracker or calculator.
+   - **Micro-Interactions**:
+     - Multi-stage typing bubble animation with bouncing indicator.
+     - Quick suggestion chips carousel for one-tap prompting.
+     - Reset conversation button with toast confirmation.
+   - **Floating AI Trigger (FAB)**:
+     - Always accessible across screens with neon lime glow ring and live status dot.
+
+10. **Simulated Checkout & Subscription Flow**:
+    - Smooth slide-up bottom sheet modal for checkout.
+    - Payment method selection: QRIS Instant, GoPay / E-Wallet, Credit Card / Debit, Mobile Balance.
+    - Success celebration modal with confetti badge that updates the Home screen remaining quota in real-time.
 
 ---
 
 ## 🖥️ Presentation Controls (Top Toolbar)
 
 - **View Mode Switcher**:
-  - **Smartphone View**: Realistic mobile device frame with glossy bezel, dynamic island, real-time clock, and smooth drop shadow.
-  - **Figma Artboard Gallery View**: Renders all 8 prototype screens side-by-side on an expansive canvas for architectural and design inspection.
-- **Screen Selector**: Jump instantly to any of the 8 screens via the dropdown.
+  - **Smartphone View**: Realistic mobile device frame with glossy bezel, dynamic island, real-time clock, floating AI assistant button, and smooth drop shadow.
+  - **Figma Artboard Gallery View**: Renders all 9 prototype screens side-by-side on an expansive canvas for architectural and design inspection.
+- **Screen Selector**: Jump instantly to any of the 9 screens via the dropdown.
 - **Hotspot Hints**: Toggle pulsing dashed outlines to indicate clickable areas.
 - **Reset**: Resets all state variables and returns to the initial Home screen.
 
